@@ -1,1 +1,27 @@
-.Button {}
+.Button {
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 5px;
+    user-select: none;
+    box-shadow: 2px 5px 10px lightgrey;
+}
+.Button img {
+    height: 30px;
+}
+.Button * {
+    display: inline-block;
+}
+.container {
+    color: white;
+    font-weight: 900;
+    padding: 7px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.container * {
+    vertical-align: middle;
+}
+.onclick {
+    box-shadow: 4px 9px 10px lightgrey;
+}

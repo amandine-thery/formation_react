@@ -1,22 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Button from './components/Button/Button';
+import Button from './components/Button/Button';//on peut mettre l'extension, c'est une bonne pratique de ne pas la mettre (.tsx, .jsx)
+import NicknameForm from './components/NicknameForm/NicknameForm';
 
-function App() {
-  return (
-    <div className="App">
-        <Button/>
-        <Button/>
-        <Button/>
-        <Button/>
-        <Button/>
-        <Button/>
-        <Button/>
-        <Button/>
+class App extends React.Component {
 
-    </div>
-  );
+  constructor(props) {
+    super(props);
+    this.state={nickname:''};
+  }
+
+  buttonClick(evt) {
+    console.log(evt);
+  }
+
+  render() {
+    return (
+      <div className="App">
+          <NicknameForm nick={this.state.nickname}  validateNick={obj=>{this.setState({nickname:obj.newNick})}}/>
+          <hr />
+          Bonjour --&gt;{this.state.nickname}&lt;--
+          <hr />
+          <Button onClick={this.buttonClick} bgColor="tomato">
+            <div>
+              I <img src="img/logo.svg" alt="logo react"/> React
+            </div>
+          </Button>
+      </div>
+    );
+  }
 }
 
 export default App;
