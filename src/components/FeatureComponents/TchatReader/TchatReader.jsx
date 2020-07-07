@@ -2,12 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './TchatReader.module.scss';
 
-const TchatReader = (props) => ( // paramètres autour de props pas obligatoires, ça le devient si plusieurs paramètres
+const TchatReader = (props) => { // paramètres autour de props pas obligatoires, ça le devient si plusieurs paramètres
+
+  const messages = [
+    {id:0, userId:"alex", message:"Demat breizh"}, 
+    {id:1, userId:"jean-raoul", message:"Hello Great Britain"}
+  ]
+
+  return (
   <div className={styles.TchatReader}>
-    <TchatMessage message={{userId:"alex", message:"Demat breizh"}} nickname={props.nickname} />
-    <TchatMessage message={{userId:"jean-raoul", message:"Hello Great Britain"}} nickname={props.nickname} />
+    {
+      // key : nécessaire pour react avec les boucles
+      messages.map((e,i)=>{
+        return <TchatMessage message={e} nickname={props.nickname} key={`message-${i}`}/>
+      })
+    }
   </div>
-);
+  )
+};
 
 TchatReader.propTypes = {
   nickname: PropTypes.string,
