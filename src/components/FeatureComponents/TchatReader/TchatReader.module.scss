@@ -1,3 +1,22 @@
 .TchatReader {
-    height: calc(100% - 80px); //100% du parent - 80px du sender
+    height: calc(100vh - 230px); //100% du parent - 80px du sender
+}
+
+.TchatMessage {
+    border-radius: 5px;
+    background-color: lightcoral;
+    width: max-content;
+    max-width: 55%;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    display: inline-block;
+    color: white;
+    font-size: large;
+    min-width: 150px;
+}
+
+.mine {
+    background-color: lightseagreen;
+    margin-right: 15px;
 }

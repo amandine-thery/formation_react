@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TchatSender from '../TchatSender/TchatSender';
 import TchatReader from '../TchatReader/TchatReader';
 import styles from './Tchat.module.scss';
+// sinon import from './Tchat.scss'; et utilisation dans className={Tchat}
 
 class Tchat extends Component {
   constructor(props) {

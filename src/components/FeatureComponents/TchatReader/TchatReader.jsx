@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './TchatReader.module.scss';
 
-const TchatReader = props => (
+const TchatReader = (props) => ( // paramètres autour de props pas obligatoires, ça le devient si plusieurs paramètres
   <div className={styles.TchatReader}>
-    <TchatMessage message={{message:""}} />
+    <TchatMessage message={{userId:"alex", message:"Demat breizh"}} nickname={props.nickname} />
+    <TchatMessage message={{userId:"jean-raoul", message:"Hello Great Britain"}} nickname={props.nickname} />
   </div>
 );
 
@@ -12,12 +13,25 @@ TchatReader.propTypes = {
   nickname: PropTypes.string,
 };
 
-export const TchatMessage = props => { //pour le rendre disponible à l'export via import TchatReacher, {TchatMessage}
-  return (<div>Message</div>);
+/**
+ * 
+ * @param {*} props 
+ */
+export const TchatMessage = (props) => { //pour le rendre disponible à l'export via import TchatReacher, {TchatMessage}
+  const isMine = props.nickname === props.message.userId;
+  return (
+    <div style={{ textAlign: (isMine ? 'right' : 'left') }}>
+      <div className={styles.TchatMessage + (isMine?" "+styles.mine:"")}>
+        {props.message.message}
+        <div style={{ color: 'black', fontSize: '12pt', textAlign: 'right', fontStyle:'italic' }}>Emis par : {props.message.userId}</div>
+        </div>
+    </div>
+    );
 }; 
 
 TchatMessage.propTypes = {
-  message: PropTypes.object,
+  message: PropTypes.object, // on ne peut pas définir en jsx la structure de l'objet contrairement à tsx
+  nickname: PropTypes.string, // pas une obligation
 };
 
 export default TchatReader; // correspond à l'import dans un autre fichier
