@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '../UIComponents/Button/node_modules/@testing-library/jest-dom/extend-expect';
 import NicknameForm from './NicknameForm';
 
 describe('<NicknameForm />', () => {
