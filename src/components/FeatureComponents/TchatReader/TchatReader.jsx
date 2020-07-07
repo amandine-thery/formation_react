@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styles from './TchatReader.module.scss';
 
 const TchatReader = (props) => { // paramètres autour de props pas obligatoires, ça le devient si plusieurs paramètres
-
-  const messages = [
+  let [messages, setMessages] = useState([
     {id:0, userId:"alex", message:"Demat breizh"}, 
     {id:1, userId:"jean-raoul", message:"Hello Great Britain"}
-  ]
+  ]);// pour le changement d'etat
+
+  // Similaire à componentDidMount et componentDidUpdate :  
+  useEffect(() => {   
+    console.log(messages);
+    setMessages([...messages, {id:2, userId:"yannick", message:'te reste t\'il du chouchen?'}]);//spread operator ...messages
+  });
+
+  /*const messages = [
+    {id:0, userId:"alex", message:"Demat breizh"}, 
+    {id:1, userId:"jean-raoul", message:"Hello Great Britain"}
+  ]*/
 
   return (
   <div className={styles.TchatReader}>
