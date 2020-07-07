@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styles from './TchatReader.module.scss';
+import * as moment from 'moment';
 
 const TchatReader = (props) => { // paramètres autour de props pas obligatoires, ça le devient si plusieurs paramètres
   let [messages, setMessages] = useState([
@@ -8,26 +9,40 @@ const TchatReader = (props) => { // paramètres autour de props pas obligatoires
     {id:1, userId:"jean-raoul", message:"Hello Great Britain"}
   ]);// pour le changement d'etat
 
+  let [lastReload, setLastReload] = useState(moment('2020-07-07').format('YYYYMMDDHHmmss'));
+
   // Similaire à componentDidMount et componentDidUpdate :  
   useEffect(() => {   
-    console.log(messages);
-    setMessages([...messages, {id:2, userId:"yannick", message:'te reste t\'il du chouchen?'}]);//spread operator ...messages
-  });
+    getRestMessages();
+    setInterval(getRestMessages, 2000);
+  }, []);// [] pour ne faire componentDidMount une seule fois
 
-  /*const messages = [
-    {id:0, userId:"alex", message:"Demat breizh"}, 
-    {id:1, userId:"jean-raoul", message:"Hello Great Britain"}
-  ]*/
+  const Moment=moment; //alias pour les fonctions
+  const getRestMessages = () => {
+    fetch('http://localhost:4456/messages?_sort=heure&_order=desc&_expand=user&heure_gte='+lastReload).then(r=>r.json()).then(r=>{
+      setMessages([...messages, ...r]);//spread operator ...messages
+      let lastRevievedMessageDate = lastReload;
+      const l = r.find(e=>{ 
+        if (e.heure >lastRevievedMessageDate) {
+          lastRevievedMessageDate = e.heure;
+        }
+      });
+      setLastReload(lastRevievedMessageDate);
+    });
+  }
 
   return (
-  <div className={styles.TchatReader}>
-    {
-      // key : nécessaire pour react avec les boucles
-      messages.map((e,i)=>{
-        return <TchatMessage message={e} nickname={props.nickname} key={`message-${i}`}/>
-      })
-    }
-  </div>
+    <>
+      <br />last reload : {moment(lastReload.substring(0,8)+'T'+lastReload.substring(8)).format('DD-MM-YYYY HH:mm:ss')}
+      <div className={styles.TchatReader}>
+        {
+          // key : nécessaire pour react avec les boucles
+          messages.map((e,i)=>{
+            return <TchatMessage message={e} nickname={props.nickname} key={`message-${i}`}/>
+          })
+        }
+      </div>
+    </>
   )
 };
 

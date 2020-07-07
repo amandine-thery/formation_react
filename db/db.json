@@ -1,0 +1,40 @@
+{
+  "messages": [
+    {
+      "id": 0,
+      "userId": "alex",
+      "message": "Demat breizh",
+      "heure": "20200707112900"
+    },
+    {
+      "userId": "jean-raoul du cable",
+      "message": "Hello small britain",
+      "heure": "20200707120001",
+      "id": 1
+    },
+    {
+      "userId": "jean-raoul du cable",
+      "message": "Hello small britain",
+      "heure": "20210707120001",
+      "id": 2
+    },
+    {
+      "userId": "jean-raoul du cable",
+      "message": "Hello small britain",
+      "heure": "20210708120001",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": "alex",
+      "nickname": "alex",
+      "img": "bob.jpg"
+    },
+    {
+      "id": "jean-raoul du cable",
+      "nickname": "jean-raoul du cable",
+      "img": "jr.jpg"
+    }
+  ]
+}
